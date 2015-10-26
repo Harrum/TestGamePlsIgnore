@@ -12,19 +12,21 @@ namespace TestGamePleaseIgnore.src
 {
     public class Resources
     {
-        public static string RESOURCE_PATH = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\";
+        public static string RESOURCE_PATH = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
 
         public static SolidColorBrush SCBRUSH_RED;
+        public static SolidColorBrush SCBRUSH_BLACK;
         public static SharpDX.DirectWrite.Factory WRITE_FACTORY;
         public static TextFormat TEXT_FORMAT;
-        public static Brush TEXT_BRUSH;
+        //public static Brush TEXT_BRUSH;
 
         public static void Initialize(RenderTarget g)
         {
             SCBRUSH_RED = new SolidColorBrush(g, Color.Red);
+            SCBRUSH_BLACK = new SolidColorBrush(g, Color.Black);
             WRITE_FACTORY = new SharpDX.DirectWrite.Factory();
             TEXT_FORMAT = new TextFormat(WRITE_FACTORY, "Arial", 14);
-            TEXT_BRUSH = new SolidColorBrush(g, Color.Red);
+            //TEXT_BRUSH = new SolidColorBrush(g, Color.Red);
         }
     }
 }

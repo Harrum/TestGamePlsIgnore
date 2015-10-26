@@ -58,16 +58,23 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="src\game\art\spritesheet.bmp" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Config.cs" />
     <Compile Include="src\Entity\BaseEntity.cs" />
+    <Compile Include="src\Entity\DynamicEntity.cs" />
+    <Compile Include="src\game\DebugOverlay.cs" />
     <Compile Include="src\game\Game.cs" />
+    <Compile Include="src\game\GameTextures.cs" />
     <Compile Include="src\InputController.cs" />
     <Compile Include="src\Resources.cs" />
     <Compile Include="src\RunnableComponent.cs" />
     <Compile Include="src\game\Test.cs" />
     <Compile Include="src\TestGamePleaseIgnore.cs" />
+    <Compile Include="src\Texture\AnimatedTexture.cs" />
+    <Compile Include="src\Texture\BaseTexture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />

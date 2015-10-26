@@ -16,7 +16,6 @@ namespace TestGamePleaseIgnore.src
 {
     public class TestGamePleaseIgnore
     {
-        public static ViewportF VIEWPORT;
         private const long MS_PER_UPDATE = TimeSpan.TicksPerSecond / 100;
         private RenderForm form;
         private Factory factory2D;
@@ -99,16 +98,18 @@ namespace TestGamePleaseIgnore.src
             renderTarget.AntialiasMode = AntialiasMode.Aliased;
             // Initialize the global resources used for drawing and writing.
             Resources.Initialize(renderTarget);
+            runnableComponent.InitBase();
         }
 
         private void LoadContent()
         {
-            //textures.LoadTextures(renderTarget);
+            runnableComponent.LoadContent(renderTarget);
         }
 
         private void Update(long elapsedTime)
         {
             runnableComponent.Update(elapsedTime);
+            input.Update();
         }
 
         private void Render()
@@ -119,7 +120,7 @@ namespace TestGamePleaseIgnore.src
 
             //Drawing here
             runnableComponent.Draw(renderTarget);
-            renderTarget.DrawText("FPS: " + fps, Resources.TEXT_FORMAT, Config.SCREEN_RECT, Resources.TEXT_BRUSH);
+            renderTarget.DrawText("FPS: " + fps, Resources.TEXT_FORMAT, Config.SCREEN_RECT, Resources.SCBRUSH_RED);
             renderTarget.EndDraw();
             swapChain.Present(0, PresentFlags.None);
         }
