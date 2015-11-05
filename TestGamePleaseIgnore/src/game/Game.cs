@@ -16,7 +16,8 @@ namespace TestGamePleaseIgnore.src.game
         //Camera camera;
         //Level level;
         GameTextures gameTextures;
-        Test test;
+        //Test test;
+        Level level;
         DebugOverlay debugOverlay;
 
         public Game()
@@ -25,6 +26,7 @@ namespace TestGamePleaseIgnore.src.game
             //level = new Level();
             //level.LoadLevel();
             gameTextures = new GameTextures();
+            level = new Level();
         }
 
         public override void Initialize()
@@ -35,7 +37,8 @@ namespace TestGamePleaseIgnore.src.game
         public override void LoadContent(RenderTarget g)
         {
             gameTextures.LoadTextures(g);
-            test = new Test();
+            level.LoadLevel("level1");
+            //test = new Test();
         }
 
         public override void Draw(RenderTarget g)
@@ -48,6 +51,8 @@ namespace TestGamePleaseIgnore.src.game
         {
             base.Update(elapsedTime);
             debugOverlay.Update(elapsedTime);
+            if (InputController.IsKeyPressed(82))
+                level.ResetLevel();
         }
 
         static int Main(string[] args)
