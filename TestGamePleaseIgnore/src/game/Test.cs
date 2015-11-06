@@ -12,6 +12,7 @@ namespace TestGamePleaseIgnore.src.game
 {
     public class Test
     {
+        /*
         public class TestEntity : BaseEntity
         {
             public TestEntity(float x, float y, float width, float height) : base(x, y, width, height)
@@ -54,15 +55,17 @@ namespace TestGamePleaseIgnore.src.game
         TestEntity testEntity;
         TextureTestEntity textureTestEntity;
         AnimatedTextureEntity animatedTextureEntity;
-
+        */
         public Test()
         {
+            /*
             testEntity = new TestEntity(20, 20, 60, 60);
             textureTestEntity = new TextureTestEntity(50, 30, 60, 60);
             animatedTextureEntity = new AnimatedTextureEntity(200, 20, 60, 60);
             Game.AddEntity(testEntity);
             Game.AddEntity(textureTestEntity);
             Game.AddEntity(animatedTextureEntity);
+            */
         }
 
         public void Draw(RenderTarget g)

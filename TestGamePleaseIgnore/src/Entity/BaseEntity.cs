@@ -26,6 +26,8 @@ namespace TestGamePleaseIgnore.src.Entity
         private RectangleF DrawingPositionRect;
         private RectangleF HitboxBounds;
 
+        //public bool drawHitbox = false;
+
         public BaseEntity(float x, float y, float width, float height)
         {
             this.X = x;
@@ -36,6 +38,26 @@ namespace TestGamePleaseIgnore.src.Entity
             this.Mirrored = false;
             this.Layer = 1;
             this.Texture = null;
+        }
+
+        public void HandleCollisions(List<BaseEntity> collisions)
+        {
+            if (collisions.Count > 0)
+            {
+                foreach (BaseEntity col in collisions)
+                {
+                    CheckCollision(col);
+                }
+            }
+            else    //No collisions but still handy to let the object know it has none.
+            {
+                CheckCollision(null);
+            } 
+        }
+
+        protected virtual void CheckCollision(BaseEntity col)
+        {
+
         }
 
         protected void SetTexture(BaseTexture texture)
@@ -66,15 +88,23 @@ namespace TestGamePleaseIgnore.src.Entity
                     Texture.Update(elapsedTime);
                 }
             }
+            //drawHitbox = false;
         }
 
         public virtual void Draw(RenderTarget g)
         {
             //Texture draw call
-            if(Texture != null)
+            if (Texture != null)
             {
+                if (Mirrored)
+                {
+                    Vector2 center = new Vector2(X + Width / 2f, Y + Height / 2f);
+                    g.Transform = Matrix3x2.Rotation(MathUtil.DegreesToRadians(180), center);
+                }
                 Texture.DrawTexture(g, X, Y, Width, Height);
-            }
+                if (Mirrored)
+                    g.Transform = Matrix.Identity;
+            }           
 
             //Debug drawing options
             if (Config.DEBUG_MODE == DebugMode.DISPLAY_HITBOX)
@@ -87,6 +117,10 @@ namespace TestGamePleaseIgnore.src.Entity
                 g.DrawLine(new Vector2(X, Y), new Vector2(X + Width, Y + Height), Resources.SCBRUSH_RED);
                 g.DrawLine(new Vector2(X, Y + Height), new Vector2(X + Width, Y), Resources.SCBRUSH_RED);
             }
+            /* Used for debug purposes
+            if (drawHitbox)
+                g.DrawRectangle(Hitbox, Resources.SCBRUSH_BLACK, 3f);
+            */
         }
     }
 }

@@ -9,6 +9,10 @@ using TestGamePleaseIgnore.src.Entity;
 
 namespace TestGamePleaseIgnore.src
 {
+    /// <summary>
+    /// Based on this article:
+    /// http://gamedevelopment.tutsplus.com/tutorials/quick-tip-use-quadtrees-to-detect-likely-collisions-in-2d-space--gamedev-374 
+    /// </summary>
     public class QuadTree
     {
         private const int MAX_OBJECTS = 10;

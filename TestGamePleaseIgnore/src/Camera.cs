@@ -46,8 +46,8 @@ namespace TestGamePleaseIgnore.src
             }
             else
             {
-                this.X = Config.SCREEN_WIDTH / 2;
-                this.Y = Config.SCREEN_HEIGHT / 2;
+                this.X = 0;
+                this.Y = 0;
             }
         }
     }

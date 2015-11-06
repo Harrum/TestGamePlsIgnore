@@ -60,15 +60,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\game\art\spritesheet.bmp" />
+    <Content Include="src\game\levels\level1.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Camera.cs" />
     <Compile Include="src\Config.cs" />
     <Compile Include="src\Entity\BaseEntity.cs" />
     <Compile Include="src\Entity\DynamicEntity.cs" />
+    <Compile Include="src\Entity\GravityEntity.cs" />
     <Compile Include="src\game\DebugOverlay.cs" />
+    <Compile Include="src\game\entitites\blocks\Block.cs" />
+    <Compile Include="src\game\entitites\Penguin.cs" />
     <Compile Include="src\game\Game.cs" />
     <Compile Include="src\game\GameTextures.cs" />
+    <Compile Include="src\game\Level.cs" />
     <Compile Include="src\InputController.cs" />
+    <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\Resources.cs" />
     <Compile Include="src\RunnableComponent.cs" />
     <Compile Include="src\game\Test.cs" />
