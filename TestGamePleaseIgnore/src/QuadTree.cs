@@ -48,6 +48,15 @@ namespace TestGamePleaseIgnore.src
         }
 
         /// <summary>
+        /// Updates the bounds of the quadtree to the new one specified.
+        /// </summary>
+        /// <param name="newBounds">The new bounds of the quadtree.</param>
+        public void UpdateBounds(RectangleF newBounds)
+        {
+            this.Bounds = newBounds;
+        }
+
+        /// <summary>
         /// Clears the quadtree.
         /// </summary>
         public void Clear()
@@ -90,8 +99,8 @@ namespace TestGamePleaseIgnore.src
         private int GetIndex(RectangleF hitbox)
         {
             int index = -1;
-            float verticalMidpoint = Bounds.X + (Bounds.Width/ 2);
-            float horizontalMidpoint = Bounds.Y + (Bounds.Height / 2);
+            float verticalMidpoint = Bounds.X + (Bounds.Width / 2f);
+            float horizontalMidpoint = Bounds.Y + (Bounds.Height / 2f);
 
             // Object can completely fit within the top quadrants
             bool topQuadrant = (hitbox.Top > Bounds.Top && hitbox.Bottom < horizontalMidpoint);
