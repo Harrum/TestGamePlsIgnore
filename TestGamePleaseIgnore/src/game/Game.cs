@@ -19,6 +19,7 @@ namespace TestGamePleaseIgnore.src.game
         //Test test;
         Level level;
         DebugOverlay debugOverlay;
+        EntityController entityController;
 
         public Game()
         {
@@ -27,10 +28,11 @@ namespace TestGamePleaseIgnore.src.game
             //level.LoadLevel();
             gameTextures = new GameTextures();
             level = new Level();
+            entityController = EntityController.GetInstance();
         }
 
         public override void Initialize()
-        { 
+        {
             debugOverlay = new DebugOverlay();
         }
 
@@ -38,6 +40,7 @@ namespace TestGamePleaseIgnore.src.game
         {
             gameTextures.LoadTextures(g);
             level.LoadLevel("level1");
+            SetGameAreaSize(level.GetBounds());
             //test = new Test();
         }
 
@@ -49,6 +52,7 @@ namespace TestGamePleaseIgnore.src.game
 
         public override void Update(long elapsedTime)
         {
+            entityController.Update(elapsedTime);
             base.Update(elapsedTime);
             debugOverlay.Update(elapsedTime);
             if (InputController.IsKeyPressed(82))
@@ -57,7 +61,7 @@ namespace TestGamePleaseIgnore.src.game
 
         static int Main(string[] args)
         {
-            Game game = new Game();
+            Game game = new Game();     
             TestGamePleaseIgnore mainLoop = new TestGamePleaseIgnore("Test Game Please Ignore", game);
             //game.Initialize();
             mainLoop.Start();
