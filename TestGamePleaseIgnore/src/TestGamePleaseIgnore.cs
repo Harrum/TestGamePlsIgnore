@@ -120,7 +120,7 @@ namespace TestGamePleaseIgnore.src
 
             //Drawing here
             runnableComponent.Draw(renderTarget);
-            renderTarget.DrawText("FPS: " + fps, Resources.TEXT_FORMAT, Config.SCREEN_RECT, Resources.SCBRUSH_RED);
+            renderTarget.DrawText("FPS: " + fps, Resources.TEXT_FORMAT, new RectangleF(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT), Resources.SCBRUSH_RED);
             renderTarget.EndDraw();
             swapChain.Present(0, PresentFlags.None);
         }
