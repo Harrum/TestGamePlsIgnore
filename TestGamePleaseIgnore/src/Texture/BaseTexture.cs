@@ -22,9 +22,9 @@ namespace TestGamePleaseIgnore.src.Texture
 
         }
 
-        public virtual void DrawTexture(RenderTarget g, float x, float y, float width, float height)
+        public virtual void DrawTexture(RenderTarget g, RectangleF position)
         {
-            g.DrawBitmap(Texture, new RectangleF(x, y, width, height), 1, BitmapInterpolationMode.NearestNeighbor);
+            g.DrawBitmap(Texture, position, 1, BitmapInterpolationMode.NearestNeighbor);
         }
     }
 }
