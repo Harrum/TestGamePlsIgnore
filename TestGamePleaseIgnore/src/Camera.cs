@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TestGamePleaseIgnore.src.Entity;
 
 namespace TestGamePleaseIgnore.src
@@ -25,6 +26,8 @@ namespace TestGamePleaseIgnore.src
         private Camera()
         {
             Actor = null;
+            this.X = 0;
+            this.Y = 0;
         }
 
         public void SetActor(BaseEntity actor)
@@ -41,13 +44,8 @@ namespace TestGamePleaseIgnore.src
         {
             if (this.Actor != null)
             {
-                this.X = Actor.X - (Config.SCREEN_WIDTH / 2);
-                this.Y = Actor.Y - (Config.SCREEN_HEIGHT / 2);
-            }
-            else
-            {
-                this.X = 0;
-                this.Y = 0;
+                this.X = (Actor.X + (Actor.Width / 2f)) - (Config.SCREEN_WIDTH / 2);
+                this.Y = (Actor.Y + (Actor.Height / 2f)) - (Config.SCREEN_HEIGHT / 2);
             }
         }
     }
