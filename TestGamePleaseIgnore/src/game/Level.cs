@@ -1,17 +1,21 @@
-﻿using System;
+﻿using SharpDX;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestGamePleaseIgnore.src.Entity;
+using TestGamePleaseIgnore.src.game.entitites;
 using TestGamePleaseIgnore.src.game.entitites.blocks;
+using Bitmap = System.Drawing.Bitmap;
+using Image = System.Drawing.Image;
 
 namespace TestGamePleaseIgnore.src.game
 {
     public class Level
     {
-        String LevelName;
+        private String LevelName;
+        private RectangleF levelBounds;
 
         public Level()
         {
@@ -24,11 +28,17 @@ namespace TestGamePleaseIgnore.src.game
             LoadLevel(LevelName);
         }
 
+        public RectangleF GetBounds()
+        {
+            return this.levelBounds;
+        }
+
         public void LoadLevel(String lvlName)
         {
             this.LevelName = lvlName;
 
             Bitmap bmp = (Bitmap)Image.FromFile(Resources.RESOURCE_PATH + "\\src\\game\\levels\\" + lvlName + ".bmp");
+            levelBounds = new RectangleF(0, 0, bmp.Width * Block.WIDTH, bmp.Height * Block.HEIGHT);
 
             for(int x = 0; x < bmp.Width; x++)
             {
@@ -48,6 +58,12 @@ namespace TestGamePleaseIgnore.src.game
                         {
                             ent = new BouncyBlock(x * Block.WIDTH, y * Block.HEIGHT, GameTextures.ArrowRight);
                             Game.AddCollidableEntity(ent);
+                        }
+                        else if (hexColor == "FF000000")
+                        {
+                            ent = new CameraEntity(x * Block.WIDTH, y * Block.HEIGHT, Block.WIDTH, Block.HEIGHT);
+                            Camera.GetInstance().SetActor(ent);
+                            Game.AddEntity(ent);
                         }
                         else if (hexColor == "FFFFFFFF")
                         {
