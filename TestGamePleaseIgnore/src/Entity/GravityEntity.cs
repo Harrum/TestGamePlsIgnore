@@ -9,7 +9,8 @@ namespace TestGamePleaseIgnore.src.Entity
 {
     public class GravityEntity : DynamicEntity
     {
-        private const float GRAVITY = 0.05f;
+        protected float Gravity = 0.05f;
+        protected float Decelleration = 0.03f;
 
         protected float Weight;
         protected bool IsAirborne;
@@ -23,35 +24,91 @@ namespace TestGamePleaseIgnore.src.Entity
 
         protected override void CheckCollision(BaseEntity col)
         {
-            if (col == null)
-                IsAirborne = true;
-            else
+            //Collission check horizontal
+            if ((Hitbox.Left + 2 > col.Hitbox.Left && Hitbox.Left + 2 < col.Hitbox.Right) ||
+                (Hitbox.Right - 2 < col.Hitbox.Right && Hitbox.Right -2 > col.Hitbox.Left) ||
+                (Hitbox.Center.X > col.Hitbox.Left && Hitbox.Center.X < col.Hitbox.Right))
             {
-                if ((this.Hitbox.Left >= col.Hitbox.Left && this.Hitbox.Left <= col.Hitbox.Right) ||
-                    (this.Hitbox.Right <= col.Hitbox.Right && this.Hitbox.Right >= col.Hitbox.Left))
+                //Collision down
+                if (Hitbox.Bottom >= col.Hitbox.Top && Hitbox.Bottom <= col.Hitbox.Center.Y)
                 {
-                    if (this.Hitbox.Bottom >= col.Hitbox.Top && this.Hitbox.Bottom <= col.Hitbox.Bottom)
-                    {
-                        IsAirborne = false;
-                        SpeedY = 0;
-                        this.Y = col.Hitbox.Top - this.Hitbox.Height;
-                        //col.drawHitbox = true;
-                    }
+                    Collision(col, Direction.Down);
                 }
-                else
+                //Collision up
+                if(Hitbox.Top <= col.Hitbox.Bottom && Hitbox.Top >= col.Hitbox.Center.Y)
                 {
-                    IsAirborne = true;
+                    Collision(col, Direction.Up);
                 }
             }
+            //Collision check vertical
+            if ((Hitbox.Top > col.Hitbox.Top && Hitbox.Top < col.Hitbox.Bottom) ||
+                (Hitbox.Bottom < col.Hitbox.Bottom && Hitbox.Bottom > col.Hitbox.Top) ||
+                (Hitbox.Center.Y > col.Hitbox.Top && Hitbox.Center.Y < col.Hitbox.Bottom))
+            {
+                //Collision left
+                if (Hitbox.Left <= col.Hitbox.Right && Hitbox.Left >= col.Hitbox.Center.X)
+                {
+                    Collision(col, Direction.Left);
+                }
+                //Collision right
+                else if (Hitbox.Right >= col.Hitbox.X && Hitbox.Right <= col.Hitbox.Center.X)
+                {
+                    Collision(col, Direction.Right);
+                }
+            }
+        }
+
+        public override void HandleCollisions(List<BaseEntity> collisions)
+        {
+            IsAirborne = true;
+            base.HandleCollisions(collisions);
+        }
+
+        protected virtual void Collision(BaseEntity col, Direction dir)
+        {
+            if(dir == Direction.Left)
+            {
+                SpeedX = 0;
+                X = col.Hitbox.Right - 1;
+            }
+            else if(dir == Direction.Right)
+            {
+                SpeedX = 0;
+                X = col.Hitbox.Left - Hitbox.Width - 1;
+            }
+            else if(dir == Direction.Up)
+            {
+                SpeedY = 0;
+                Y = col.Hitbox.Bottom;
+            }
+            else if(dir == Direction.Down)
+            {
+                IsAirborne = false;
+                SpeedY = 0;
+                Y = col.Hitbox.Top - Hitbox.Height;
+                //col.drawHitbox = true;
+            }
+            UpdateHitbox();
         }
 
         public override void Update(long elapsedTime)
         {
             if(IsAirborne)
             {
-                this.SpeedY += GRAVITY * Weight;
+                this.SpeedY += Gravity * Weight;
             }
             base.Update(elapsedTime);
+
+            if(this.SpeedX > 0)
+            {
+                SpeedX -= Decelleration * Weight;
+                if (SpeedX < 0) SpeedX = 0;
+            }
+            else if(SpeedX < 0)
+            {
+                SpeedX += Decelleration * Weight;
+                if (SpeedX > 9) SpeedX = 0;
+            }
         }
     }
 }
