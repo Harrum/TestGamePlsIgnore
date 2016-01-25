@@ -121,6 +121,12 @@ namespace TestGamePleaseIgnore.src
             CollidableEntities.Add(entity);
         }
 
+        public static void RemoveEntity(BaseEntity entity)
+        {
+            Entities.Remove(entity);
+            CollidableEntities.Remove(entity);
+        }
+
         /// <summary>
         /// Updates all the entites.
         /// </summary>
@@ -146,6 +152,7 @@ namespace TestGamePleaseIgnore.src
         {
             Vector2 viewPortTranslation = new Vector2(-VIEWPORT.X, -VIEWPORT.Y);
             ViewportIDMatrix = Matrix.Identity;
+            //ViewportIDMatrix.ScaleVector = new Vector2(-1, 1);
             ViewportIDMatrix.TranslationVector = viewPortTranslation;
             g.Transform = ViewportIDMatrix;
         }
@@ -158,16 +165,21 @@ namespace TestGamePleaseIgnore.src
         {
             //At the start set the matrix to the identy viewport matrix
             SetMatrixViewportID(g);
-
             //Start drawing all the entities.
             foreach (BaseEntity ent in VisibleEntities)
             {
                 //If an entity is mirror the matrix needs to get mirrored too.
                 if(ent.Mirrored)
                 {
+                    Matrix3x2 m = g.Transform;
+                    m.ScaleVector = new Vector2(-1, 1);
+                    m.TranslationVector = new Vector2(-VIEWPORT.X + ent.X + ent.Width + ent.X, -VIEWPORT.Y);
+                    g.Transform = m;
+                    /*
                     Vector2 mirroredviewPortTranslation = new Vector2(-VIEWPORT.X + ent.X + ent.Width + ent.X, -VIEWPORT.Y);
                     ViewportIDMatrixMirror.TranslationVector = mirroredviewPortTranslation;
                     g.Transform = ViewportIDMatrixMirror;
+                    */
                 }
 
                 //Actual drawing of the entity

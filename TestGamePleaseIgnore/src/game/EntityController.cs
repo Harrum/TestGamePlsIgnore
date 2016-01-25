@@ -43,10 +43,8 @@ namespace TestGamePleaseIgnore.src.game
                     puppet.MoveLeft();
                 else if (InputController.IsKeyDown((int)Keys.D))
                     puppet.MoveRight();
-                if (InputController.IsKeyDown((int)Keys.W))
-                    puppet.MoveUp();
-                else if (InputController.IsKeyDown((int)Keys.S))
-                    puppet.MoveDown();
+                if (InputController.IsKeyDown((int)Keys.Space))
+                    puppet.Jump();
             }
         }
     }

@@ -61,9 +61,10 @@ namespace TestGamePleaseIgnore.src.game
                         }
                         else if (hexColor == "FF000000")
                         {
-                            ent = new CameraEntity(x * Block.WIDTH, y * Block.HEIGHT, Block.WIDTH, Block.HEIGHT);
+                            ent = new Penguin(x * Block.WIDTH, y * Block.HEIGHT);
                             Camera.GetInstance().SetActor(ent);
-                            Game.AddEntity(ent);
+                            EntityController.GetInstance().SetPuppetEntity((ControllableEntity)ent);
+                            Game.AddCollidableEntity(ent);
                         }
                         else if (hexColor == "FFFFFFFF")
                         {

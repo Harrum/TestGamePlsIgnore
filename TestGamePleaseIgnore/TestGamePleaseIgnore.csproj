@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>TestGamePleaseIgnore.src.game.Game</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
@@ -66,14 +69,19 @@
     <Compile Include="src\Camera.cs" />
     <Compile Include="src\Config.cs" />
     <Compile Include="src\Entity\BaseEntity.cs" />
+    <Compile Include="src\Entity\ControllableEntity.cs" />
     <Compile Include="src\Entity\DynamicEntity.cs" />
     <Compile Include="src\Entity\GravityEntity.cs" />
     <Compile Include="src\game\DebugOverlay.cs" />
     <Compile Include="src\game\entitites\blocks\Block.cs" />
+    <Compile Include="src\game\entitites\CameraEntity.cs" />
+    <Compile Include="src\game\entitites\Effects\CollisionEffect.cs" />
     <Compile Include="src\game\entitites\Penguin.cs" />
+    <Compile Include="src\game\EntityController.cs" />
     <Compile Include="src\game\Game.cs" />
     <Compile Include="src\game\GameTextures.cs" />
     <Compile Include="src\game\Level.cs" />
+    <Compile Include="src\game\SpriteTester.cs" />
     <Compile Include="src\InputController.cs" />
     <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\Resources.cs" />

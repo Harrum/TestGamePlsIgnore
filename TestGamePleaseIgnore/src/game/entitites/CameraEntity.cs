@@ -8,7 +8,7 @@ using TestGamePleaseIgnore.src.Entity;
 
 namespace TestGamePleaseIgnore.src.game.entitites
 {
-    public class CameraEntity : ControllableEntity
+    public class CameraEntity : DynamicEntity
     {
         private const float CAM_SPEED = 2f;
 
@@ -16,26 +16,6 @@ namespace TestGamePleaseIgnore.src.game.entitites
         {
             base.SetTexture(GameTextures.CameraTexture);
             base.Layer = 5;
-        }
-
-        public override void MoveLeft()
-        {
-            this.SpeedX = -CAM_SPEED;
-        }
-
-        public override void MoveRight()
-        {
-            this.SpeedX = CAM_SPEED;
-        }
-
-        public override void MoveUp()
-        {
-            this.SpeedY = CAM_SPEED;
-        }
-
-        public override void MoveDown()
-        {
-            this.SpeedY = -CAM_SPEED;
         }
 
         public override void Update(long elapsedTime)
