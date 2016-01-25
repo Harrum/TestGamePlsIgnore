@@ -37,6 +37,7 @@ namespace TestGamePleaseIgnore.src.game.entitites.blocks
         {
             this.SpeedX = speed;
             base.SetTexture(texture);
+            base.Decelleration = 0;
         }
 
         protected override void CheckCollision(BaseEntity col)
@@ -54,6 +55,15 @@ namespace TestGamePleaseIgnore.src.game.entitites.blocks
                     //col.drawHitbox = true;
                 }
             }
+        }
+
+        public override void Update(long elapsedTime)
+        {
+            if (SpeedX > 0)
+                base.Mirrored = false;
+            else if (SpeedX < 0)
+                base.Mirrored = true;
+            base.Update(elapsedTime);
         }
     }
 }
