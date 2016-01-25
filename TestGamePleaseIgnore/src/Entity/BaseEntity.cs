@@ -6,12 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestGamePleaseIgnore.src.game;
 using TestGamePleaseIgnore.src.Texture;
 
 namespace TestGamePleaseIgnore.src.Entity
 {
     public class BaseEntity
     {
+        public enum Direction
+        {
+            Left, Right, Up, Down
+        }
+
         public float X { get; protected set; }
         public float Y { get; protected set; }
         public float Width { get; protected set; }
@@ -28,6 +34,10 @@ namespace TestGamePleaseIgnore.src.Entity
 
         //public bool drawHitbox = false;
 
+        public BaseEntity() : this(0, 0, 0, 0)
+        {
+        }
+
         public BaseEntity(float x, float y, float width, float height)
         {
             this.X = x;
@@ -40,7 +50,7 @@ namespace TestGamePleaseIgnore.src.Entity
             this.Texture = null;
         }
 
-        public void HandleCollisions(List<BaseEntity> collisions)
+        public virtual void HandleCollisions(List<BaseEntity> collisions)
         {
             if (collisions.Count > 0)
             {
@@ -96,14 +106,8 @@ namespace TestGamePleaseIgnore.src.Entity
             //Texture draw call
             if (Texture != null)
             {
-                if (Mirrored)
-                {
-                    Vector2 center = new Vector2(X + Width / 2f, Y + Height / 2f);
-                    g.Transform = Matrix3x2.Rotation(MathUtil.DegreesToRadians(180), center);
-                }
-                Texture.DrawTexture(g, X, Y, Width, Height);
-                if (Mirrored)
-                    g.Transform = Matrix.Identity;
+                DrawingPositionRect = new RectangleF(X - Game.VIEWPORT.X, Y - Game.VIEWPORT.Y, Width, Height);
+                Texture.DrawTexture(g, new RectangleF(X, Y, Width, Height));
             }           
 
             //Debug drawing options
